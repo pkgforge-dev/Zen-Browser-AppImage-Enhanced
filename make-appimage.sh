@@ -9,10 +9,16 @@ export OUTPATH=./dist
 export ADD_HOOKS="self-updater.bg.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export DESKTOP=https://raw.githubusercontent.com/zen-browser/desktop/refs/heads/dev/build/AppDir/zen.desktop
+export DEPLOY_OPENGL=1
+export DEPLOY_VULKAN=1
 
 # Deploy dependencies
 # for some reason we need to set LD_LIBRARY_PATH for zen to find its bundled libs
-LD_LIBRARY_PATH=$PWD/AppDir/bin quick-sharun ./AppDir/bin/*
+export LD_LIBRARY_PATH=$PWD/AppDir/bin 
+quick-sharun \
+	./AppDir/bin/* \
+	/usr/lib/libavcodec.so.6*
+unset LD_LIBRARY_PATH
 
 echo 'MOZ_LEGACY_PROFILES=1'        >> ./AppDir/.env
 echo 'MOZ_APP_LAUNCHER=${APPIMAGE}' >> ./AppDir/.env
