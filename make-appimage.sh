@@ -14,6 +14,9 @@ export DESKTOP=https://raw.githubusercontent.com/zen-browser/desktop/refs/heads/
 # for some reason we need to set LD_LIBRARY_PATH for zen to find its bundled libs
 LD_LIBRARY_PATH=$PWD/AppDir/bin quick-sharun ./AppDir/bin/*
 
+echo 'MOZ_LEGACY_PROFILES=1'        >> ./AppDir/.env
+echo 'MOZ_APP_LAUNCHER=${APPIMAGE}' >> ./AppDir/.env
+
 # Additional changes can be done in between here
 
 # Turn AppDir into AppImage
@@ -21,4 +24,4 @@ quick-sharun --make-appimage
 
 # Test the app for 12 seconds, if the test fails due to the app
 # having issues running in the CI use --simple-test instead
-quick-sharun --test ./dist/*.AppImage
+quick-sharun --simple-test ./dist/*.AppImage
