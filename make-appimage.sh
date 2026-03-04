@@ -11,7 +11,8 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 export DESKTOP=https://raw.githubusercontent.com/zen-browser/desktop/refs/heads/dev/build/AppDir/zen.desktop
 
 # Deploy dependencies
-quick-sharun ./AppDir/bin/*
+# for some reason we need to set LD_LIBRARY_PATH for zen to find its bundled libs
+LD_LIBRARY_PATH=$PWD/AppDir/bin quick-sharun ./AppDir/bin/*
 
 # Additional changes can be done in between here
 
