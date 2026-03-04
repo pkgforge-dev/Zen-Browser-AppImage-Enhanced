@@ -23,6 +23,9 @@ export PRE_BUILD_CMDS="
 "
 make-aur-package zen-browser-bin
 
+mkdir -p ./AppDir/bin
+cp -r /opt/zen-browser-bin/* ./AppDir/bin
+
 # If the application needs to be manually built that has to be done down here
 
 # if you also have to make nightly releases check for DEVEL_RELEASE = 1
