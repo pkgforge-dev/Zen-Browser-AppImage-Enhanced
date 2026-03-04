@@ -6,7 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm libcanberra
 
 if [ "$ARCH" = 'x86_64' ]; then
 	pacman -Syu --noconfirm libva-intel-driver
@@ -18,6 +18,7 @@ get-debloated-pkgs --add-common --prefer-nano intel-media-driver-mini ffmpeg-min
 
 # Comment this out if you need an AUR package
 export PRE_BUILD_CMDS="
+	sed -i -e 's|ffmpeg4.4||'                ./PKGBUILD
 	sed -i -e '/ln -Ts \/usr\/share/d'       ./PKGBUILD
 	sed -i -e '/ln -sf \/usr\/lib\/libnss/d' ./PKGBUILD
 "
