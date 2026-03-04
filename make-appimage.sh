@@ -18,7 +18,7 @@ export ANYLINUX_LIB=1
 export LD_LIBRARY_PATH=$PWD/AppDir/bin 
 quick-sharun \
 	./AppDir/bin/* \
-	/usr/lib/libavcodec.so.6*
+	/usr/lib/libavcodec.so*
 unset LD_LIBRARY_PATH
 
 echo 'MOZ_LEGACY_PROFILES=1'        >> ./AppDir/.env
