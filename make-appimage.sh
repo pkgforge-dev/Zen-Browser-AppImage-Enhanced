@@ -17,8 +17,9 @@ export ANYLINUX_LIB=1
 # for some reason we need to set LD_LIBRARY_PATH for zen to find its bundled libs
 export LD_LIBRARY_PATH=$PWD/AppDir/bin 
 quick-sharun \
-	./AppDir/bin/* \
-	/usr/lib/libavcodec.so*
+	./AppDir/bin/*          \
+	/usr/lib/libavcodec.so* \
+	/usr/lib/libcanberra.so*
 unset LD_LIBRARY_PATH
 
 echo 'MOZ_LEGACY_PROFILES=1'        >> ./AppDir/.env
