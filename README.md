@@ -11,6 +11,8 @@
 </p>
 
 
+Improved AppImage of Zen Browser **independent of the host libc** which makes able to work on very very old distros as well as musl-libc distros like alpine linux. 
+
 | Latest Stable Release | Upstream URL |
 | :---: | :---: |
 | [Click here](https://github.com/pkgforge-dev/Zen-Browser-AppImage-Enhanced/releases/latest) | [Click here](https://github.com/zen-browser/desktop) |
