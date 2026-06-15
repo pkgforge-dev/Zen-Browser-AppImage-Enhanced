@@ -3,8 +3,7 @@
 set -eu
 
 ARCH=$(uname -m)
-VERSION=$(pacman -Q zen-browser-bin | awk '{print $2; exit}') # example command to get version of application here
-export ARCH VERSION
+export ARCH
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.bg.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
@@ -16,12 +15,10 @@ export URUNTIME_PRELOAD=1
 
 # Deploy dependencies
 # for some reason we need to set LD_LIBRARY_PATH for zen to find its bundled libs
-export LD_LIBRARY_PATH=$PWD/AppDir/bin 
-quick-sharun \
-	./AppDir/bin/*          \
-	/usr/lib/libavcodec.so* \
-	/usr/lib/libcanberra.so*
-unset LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$PWD/AppDir/bin quick-sharun \
+		./AppDir/bin/*          \
+		/usr/lib/libavcodec.so* \
+		/usr/lib/libcanberra.so*
 
 echo 'MOZ_LEGACY_PROFILES=1'        >> ./AppDir/.env
 echo 'MOZ_APP_LAUNCHER=${APPIMAGE}' >> ./AppDir/.env

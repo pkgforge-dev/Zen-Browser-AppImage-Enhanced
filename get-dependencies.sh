@@ -17,22 +17,20 @@ echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano intel-media-driver-mini ffmpeg-mini
 
 # Comment this out if you need an AUR package
-export PRE_BUILD_CMDS="
-	sed -i -e 's|ffmpeg4.4||'                ./PKGBUILD
-	sed -i -e '/ln -Ts \/usr\/share/d'       ./PKGBUILD
-	sed -i -e '/ln -sf \/usr\/lib\/libnss/d' ./PKGBUILD
-"
-make-aur-package zen-browser-bin
-
-mkdir -p ./AppDir/bin
-cp -r /opt/zen-browser-bin/* ./AppDir/bin
+#make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
+echo "Getting binary..."
+echo "---------------------------------------------------------------"
+link=https://github.com/zen-browser/desktop/releases/download/1.21.1b/zen.linux-$ARCH.tar.xz
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+wget --retry-connrefused --tries=30 "$link" -O /tmp/tarball.tar.xz
+mkdir -p ./AppDir/bin
+tar xfv /tmp/tarball.tar.xz
+mv -v ./zen/* ./AppDir/bin
+
+cp -v ./AppDir/bin/browser/chrome/icons/default/default128.png ./AppDir/zen.png
+cp -v ./AppDir/bin/browser/chrome/icons/default/default128.png ./AppDir/.DirIcon
+rm -rf /tmp/tarball.tar.xz ./zen
+
+awk -F'=' '/Version=/{print $2; exit}' ./AppDir/bin/application.ini > ~/version
