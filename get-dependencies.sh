@@ -22,7 +22,7 @@ get-debloated-pkgs --add-common --prefer-nano intel-media-driver-mini ffmpeg-min
 # If the application needs to be manually built that has to be done down here
 echo "Getting binary..."
 echo "---------------------------------------------------------------"
-link=https://github.com/zen-browser/desktop/releases/download/1.21.1b/zen.linux-$ARCH.tar.xz
+link=https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-$ARCH.tar.xz
 
 wget --retry-connrefused --tries=30 "$link" -O /tmp/tarball.tar.xz
 mkdir -p ./AppDir/bin
